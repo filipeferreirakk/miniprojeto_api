@@ -34,6 +34,15 @@ def cadastrar_livro(titulo, autor, ano):
     print("Cadastrado:", resposta.json())
 
 
+def atualizar_livro(book_id, titulo, autor, ano):
+    payload = {"titulo": titulo, "autor": autor, "ano": ano}
+    resposta = requests.put(f"{BASE_URL}/books/{book_id}", json=payload)
+    if resposta.status_code == 404:
+        print("Livro nao encontrado")
+        return
+    print("Atualizado:", resposta.json())
+
+
 checar_status()
-cadastrar_livro("Memorias Postumas de Bras Cubas", "Machado de Assis", 1881)
+atualizar_livro(1, "Dom Casmurro (edicao revista)", "Machado de Assis", 1899)
 listar_livros()
