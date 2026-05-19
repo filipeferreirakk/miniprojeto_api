@@ -23,5 +23,13 @@ def listar_livros():
     return livros
 
 
+@app.route("/books/<int:book_id>")
+def buscar_livro(book_id):
+    for livro in livros:
+        if livro["id"] == book_id:
+            return livro
+    return {"erro": "livro nao encontrado"}, 404
+
+
 if __name__ == "__main__":
     app.run(debug=True)
