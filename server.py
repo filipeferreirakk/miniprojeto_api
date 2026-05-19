@@ -20,6 +20,9 @@ def health():
 
 @app.route("/books")
 def listar_livros():
+    autor = request.args.get("autor")
+    if autor:
+        return [l for l in livros if autor.lower() in l["autor"].lower()]
     return livros
 
 
