@@ -28,6 +28,12 @@ def buscar_livro(book_id):
     print(f"\nEncontrado: {livro['titulo']} de {livro['autor']}, {livro['ano']}")
 
 
+def cadastrar_livro(titulo, autor, ano):
+    payload = {"titulo": titulo, "autor": autor, "ano": ano}
+    resposta = requests.post(f"{BASE_URL}/books", json=payload)
+    print("Cadastrado:", resposta.json())
+
+
 checar_status()
+cadastrar_livro("Memorias Postumas de Bras Cubas", "Machado de Assis", 1881)
 listar_livros()
-buscar_livro(1)
