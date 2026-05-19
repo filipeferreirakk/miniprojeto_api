@@ -8,5 +8,10 @@ def root():
     return {"mensagem": "API da biblioteca no ar"}
 
 
+@app.route("/health")
+def health():
+    return {"status": "ok"}
+
+
 if __name__ == "__main__":
     app.run(debug=True)
