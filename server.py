@@ -57,5 +57,14 @@ def atualizar_livro(book_id):
     return {"erro": "livro nao encontrado"}, 404
 
 
+@app.route("/books/<int:book_id>", methods=["DELETE"])
+def remover_livro(book_id):
+    for i, livro in enumerate(livros):
+        if livro["id"] == book_id:
+            livros.pop(i)
+            return {"mensagem": "livro removido"}
+    return {"erro": "livro nao encontrado"}, 404
+
+
 if __name__ == "__main__":
     app.run(debug=True)
