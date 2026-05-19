@@ -18,5 +18,10 @@ def health():
     return {"status": "ok"}
 
 
+@app.route("/books")
+def listar_livros():
+    return livros
+
+
 if __name__ == "__main__":
     app.run(debug=True)
