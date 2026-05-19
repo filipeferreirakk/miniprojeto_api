@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -29,6 +29,20 @@ def buscar_livro(book_id):
         if livro["id"] == book_id:
             return livro
     return {"erro": "livro nao encontrado"}, 404
+
+
+@app.route("/books", methods=["POST"])
+def criar_livro():
+    dados = request.get_json()
+    novo_id = max([l["id"] for l in livros], default=0) + 1
+    novo = {
+        "id": novo_id,
+        "titulo": dados["titulo"],
+        "autor": dados["autor"],
+        "ano": dados["ano"],
+    }
+    livros.append(novo)
+    return novo, 201
 
 
 if __name__ == "__main__":
