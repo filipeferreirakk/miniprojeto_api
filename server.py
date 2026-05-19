@@ -45,5 +45,17 @@ def criar_livro():
     return novo, 201
 
 
+@app.route("/books/<int:book_id>", methods=["PUT"])
+def atualizar_livro(book_id):
+    dados = request.get_json()
+    for livro in livros:
+        if livro["id"] == book_id:
+            livro["titulo"] = dados["titulo"]
+            livro["autor"] = dados["autor"]
+            livro["ano"] = dados["ano"]
+            return livro
+    return {"erro": "livro nao encontrado"}, 404
+
+
 if __name__ == "__main__":
     app.run(debug=True)
