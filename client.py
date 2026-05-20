@@ -43,6 +43,14 @@ def atualizar_livro(book_id, titulo, autor, ano):
     print("Atualizado:", resposta.json())
 
 
+def remover_livro(book_id):
+    resposta = requests.delete(f"{BASE_URL}/books/{book_id}")
+    if resposta.status_code == 404:
+        print("Livro nao encontrado")
+        return
+    print("Removido:", resposta.json())
+
+
 checar_status()
-atualizar_livro(1, "Dom Casmurro (edicao revista)", "Machado de Assis", 1899)
+remover_livro(2)
 listar_livros()
