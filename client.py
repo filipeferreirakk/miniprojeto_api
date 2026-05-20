@@ -8,13 +8,16 @@ def checar_status():
     print("Status do servidor:", resposta.json())
 
 
-def listar_livros():
-    resposta = requests.get(f"{BASE_URL}/books")
+def listar_livros(autor=None):
+    parametros = {}
+    if autor:
+        parametros["autor"] = autor
+    resposta = requests.get(f"{BASE_URL}/books", params=parametros)
     livros = resposta.json()
     if not livros:
-        print("Nenhum livro cadastrado")
+        print("Nenhum livro encontrado")
         return
-    print("\nLivros cadastrados:")
+    print("\nLivros:")
     for livro in livros:
         print(f"  [{livro['id']}] {livro['titulo']} - {livro['autor']} ({livro['ano']})")
 
@@ -52,5 +55,4 @@ def remover_livro(book_id):
 
 
 checar_status()
-remover_livro(2)
-listar_livros()
+listar_livros(autor="Machado")
